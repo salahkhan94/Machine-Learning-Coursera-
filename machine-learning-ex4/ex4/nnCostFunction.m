@@ -121,6 +121,23 @@ end
 Theta1_grad = del1/m;
 Theta2_grad = del2/m;
 
+for q= 1:n
+    if(q==1)
+        s = size(Theta1);
+    else
+        s = size(Theta2);
+    end
+    for i = 1:s(1)
+        for j = 2:s(2)
+            if(q==1)
+                Theta1_grad(i,j) = Theta1_grad(i,j) +Theta1(i,j)*lambda/m;
+                
+            else
+                Theta2_grad(i,j) = Theta2_grad(i,j) +Theta2(i,j)*lambda/m;
+            end
+        end
+    end
+end
 
 
 

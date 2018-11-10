@@ -102,19 +102,35 @@ J = J+r;
 del1 = zeros(size(Theta1));
 del2 = zeros(size(Theta2));
 for i=1:m
-    z2 = [1 X(1,:)] * Theta1';
-    h1 = sigmoid(z2);
-    z3 = [1 h1] * Theta2';
-    h2 = sigmoid(z3);
-    d3 = h2-Y(i,:);
-    d2 = Theta2(:,2:end)'*d3.*sigmoidGradient(z2);
-    del1 = del1 + d2*h1';
-    del2 = del2 + d3*h2';
+    a1 = [1 X(i,:)];
+    z2 = a1 * Theta1';
+    a2 = sigmoid(z2);
+    a2 = [1 a2];
+    z3 = a2 * Theta2';
+    a3 = sigmoid(z3);
+    
+    d3 = a3-Y(i,:);
+    
+    d = Theta2(:,2:end)'*d3';
+    g = sigmoidGradient(z2);
+    d2 = (d).*g';
+    
+    del1 = del1 + d2*a1;
+    del2 = del2 + d3'*a2;
 end
 Theta1_grad = del1/m;
 Theta2_grad = del2/m;
 
-
+for q= 1:n
+    if(q==1)
+        s = size(Theta1);
+    else
+        s = size(Theta2);
+    end
+    for i = 1:s(1)
+        for j = 2:s(2)
+            Theta1_
+        
 
 
 
